@@ -55,6 +55,31 @@
 			return $ret;
 		}
 		
+		public function query_sql($sql)
+		{
+			$records = false;
+			
+			$link = dbapi_connect($this->host, $this->user, $this->password, $this->database);
+			if($link)
+			{
+				print "[dblink::query_sql] database {$this->database} is connected<br>";
+				
+				print "[dblink::query_sql] query sql: ". $sql . "<br>";
+				$records = dbapi_query_sql($link, $sql);
+				
+				print "[dblink::query_sql] get $records->num_rows rows<br>";
+				
+				dbapi_close($link);
+				print "[dblink::query_sql] database {$this->database} is closed<br>";
+			}
+			else
+			{
+				print "[dblink::query_sql] error: database {$this->database} connection fail<br>"; 
+			}
+			
+			return $records;
+		}
+		
 	}
 	
 ?>

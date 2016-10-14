@@ -23,4 +23,9 @@
 			return true;
 		}
 	}
+	
+	function dbapi_query_sql($link, $sql)
+	{
+		return $link->query($sql);
+	}
 ?>
