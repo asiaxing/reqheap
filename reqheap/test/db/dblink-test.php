@@ -52,7 +52,7 @@
 					if($ret)
 					{
 						// drop test user
-						$sql = "drop user $test_user@$host";
+						$sql = "drop user if exists $test_user@$host";
 						$ret = $super_dblink->exec_sql($sql);
 					}
 				}
