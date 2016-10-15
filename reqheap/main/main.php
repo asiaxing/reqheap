@@ -4,6 +4,14 @@
         header("Location:index.php?inc=login");
         
     include("ini/txts/".$_SESSION['chlang']."/state.php");
+    
+    /*
+    $host = 'localhost';	
+	$app_database = 'app_database';
+	$app_user = 'app_user';
+	$app_user_password = '123_abc_ABC';
+	$app_dblink = new dblink($host, $app_user, $app_user_password, $app_database);
+	*/
 ?>
 
 <table border="0" width="100%">
@@ -23,10 +31,10 @@
 	                /*
 	                //getting requirements - assigned
 	                $query="select r.*, date_format(r.r_creation_date, '%d.%m.%Y %H:%i') as d1, date_format(r.r_change_date, '%d.%m.%Y %H:%i') as d2, p.p_id,p.p_name from requirements r left outer join projects p on r.r_p_id=p.p_id where  r.r_assigned_u_id=".$_SESSION['uid']." and r.r_p_id in (".$project_list.") order by r.r_change_date desc";
-	                $rs = mysql_query($query) or die(mysql_error());
-	                while($row=mysql_fetch_array($rs)) 
+	                $rs = $app_dblink->query_sql($query);
+	                while($row=$rs->fetch_object()) 
 	                {
-	                    if(mktime (0,0,0,date("m"),date("d")-2,date("Y")) < mktime(0,0,0,substr($row['d1'],3,2),substr($row['d1'],0,2),substr($row['d1'],6,4)))
+	                    if(mktime (0,0,0,date("m"),date("d")-2,date("Y")) < mktime(0,0,0,substr($row->d1,3,2),substr($row->d1,0,2),substr($row->d1,6,4)))
 	                        $new=1;
 	                    else
 	                        $new=0;
@@ -36,15 +44,16 @@
 	            ?>
 	            <!--
 	            <tr class="red" style="background-color:<?php print $cl?>;">
-	                <td width="30" align=center>&nbsp;<a href="index.php?inc=view_requirement&r_id=<?php print $row['r_id']?>"><?php print $new?"<b>":""?><?php print $row['r_id']?><?php print $new?"</b>":""?></a></td>
-	                <td>&nbsp;<?php print $new?"<b>":""?><?php print htmlspecialchars($row['r_name'])?><?php print $new?"</b>":""?></td>
-	                <td width="110">&nbsp;<?php print $new?"<b>":""?><?php print ($row['d2']!="00.00.0000 00:00")?$row['d2']:"(".$row['d1'].")"?><?php print $new?"</b>":""?></td>
-	                <td width="100">&nbsp;<a href="index.php?inc=view_project&p_id=<?php print $row['p_id']?>"><?php print $new?"<b>":""?><?php print htmlspecialchars($row['p_name'])?><?php print $new?"</b>":""?></a></td>
+	                <td width="30" align=center>&nbsp;<a href="index.php?inc=view_requirement&r_id=<?php print $row->r_id ?>"><?php print $new?"<b>":""?><?php print $row->r_id ?><?php print $new?"</b>":""?></a></td>
+	                <td>&nbsp;<?php print $new ?"<b>":""?><?php print htmlspecialchars($row->r_name)?><?php print $new?"</b>":""?></td>
+	                <td width="110">&nbsp;<?php print $new?"<b>":""?><?php print ($row['d2']!="00.00.0000 00:00")?$row->d2:"(".$row->d1.")"?><?php print $new?"</b>":""?></td>
+	                <td width="100">&nbsp;<a href="index.php?inc=view_project&p_id=<?php print $row->p_id ?>"><?php print $new?"<b>":""?><?php print htmlspecialchars($row->p_name)?><?php print $new?"</b>":""?></a></td>
 	            </tr>
-	            -->  
+	            -->
 	            <?php
 	                /*
 	                }
+	                $rs->close();
 	                */
 	            ?>
 	            
@@ -65,28 +74,29 @@
 	                /*
 	                //getting requirements - waiting for acceptance
 	                $query="select r.*, date_format(r.r_creation_date, '%d.%m.%Y %H:%i') as d1, date_format(r.r_change_date, '%d.%m.%Y %H:%i') as d2, p.p_id,p.p_name from requirements r left outer join projects p on r.r_p_id=p.p_id where r.r_state=0 and r.r_p_id in (".$project_list.") order by r.r_change_date desc";
-	                $rs = mysql_query($query) or die(mysql_error());
-	                while($row=mysql_fetch_array($rs)) 
+	                $rs = $app_dblink->query_sql($query);
+	                while($row=$rs->fetch_object()) 
 	                {
-	                    if (mktime (0,0,0,date("m"),date("d")-2,date("Y")) < mktime (0,0,0,substr($row['d1'],3,2),substr($row['d1'],0,2),substr($row['d1'],6,4)))
+	                    if (mktime (0,0,0,date("m"),date("d")-2,date("Y")) < mktime (0,0,0,substr($row->d1,3,2),substr($row->d1,0,2),substr($row->d1,6,4)))
 	                        $new=1;
 	                    else
 	                        $new=0;	  
 	                    
-	                    $cl=$state_colors_array[$row['r_state']];
+	                    $cl=$state_colors_array[$row->r_state];
 	                */
 	            ?>
 	            <!--
-	            <tr class="orange" style="background-color:<?php print $cl?>;">
-	                <td width="30" align=center>&nbsp;<a href="index.php?inc=view_requirement&r_id=<?php print $row['r_id']?>"><?php print $new?"<b>":""?><?php print $row['r_id']?><?php print $new?"</b>":""?></a></td>
-	                <td>&nbsp;<?php print $new?"<b>":""?><?php print htmlspecialchars($row['r_name'])?><?php print $new?"</b>":""?></td>
-	                <td width="110">&nbsp;<?php print $new?"<b>":""?><?php print ($row['d2']!="00.00.0000 00:00")?$row['d2']:"(".$row['d1'].")"?><?php print $new?"</b>":""?></td>
-	                <td width="100">&nbsp;<a href="index.php?inc=view_project&p_id=<?php print $row['p_id']?>"><?php print $new?"<b>":""?><?php print htmlspecialchars($row['p_name'])?><?php print $new?"</b>":""?></a></td>
+	            <tr class="orange" style="background-color:<?php print $cl ?>;">
+	                <td width="30" align=center>&nbsp;<a href="index.php?inc=view_requirement&r_id=<?php print $row->r_id?>"><?php print $new?"<b>":""?><?php print $row['r_id']?><?php print $new?"</b>":""?></a></td>
+	                <td>&nbsp;<?php print $new?"<b>":""?><?php print htmlspecialchars($row->r_name)?><?php print $new?"</b>":""?></td>
+	                <td width="110">&nbsp;<?php print $new?"<b>":""?><?php print ($row->d2!="00.00.0000 00:00")?$row->d2:"(".$row->d1.")"?><?php print $new?"</b>":""?></td>
+	                <td width="100">&nbsp;<a href="index.php?inc=view_project&p_id=<?php print $row['p_id']?>"><?php print $new?"<b>":""?><?php print htmlspecialchars($row->p_name)?><?php print $new?"</b>":""?></a></td>
 	            </tr>	  
 	            -->
 	            <?php
 	                /*
 	                }
+	                $rs->close();
 	                */
 	            ?>
 	            
@@ -102,21 +112,30 @@
 	            <table border="0" cellpadding="2" cellspacing="2" class="content" width="50%">
 	            
 	            <?php
-	                /*
+	                
 	                //paging query, number of results (from the param.php file) per page displayed
 	                $paging=$PPAGE;
 	                if ($_ppaging!="")
 	                    $paging=$_ppaging;
 	                $_ppaging=$paging;
 	                
+	                /*
 	                $query="select count(*) from requirements r left outer join projects p on r.r_p_id=p.p_id where r.r_p_id in (".$project_list.")";
-	                $rs = mysql_query($query) or die(mysql_error());
-	                if($row=mysql_fetch_array($rs)) $all_count=$row[0];
-	                if ($from=="") $from=0; 
-                	if ($from+$paging>$all_count)
-                	    $cnt2=$all_count;
-	                else
-	                    $cnt2=$from+$paging;
+	                
+	                #$rs = $app_dblink->query_sql($query);
+	                #if($rs->num_rows)
+	                {
+	                    
+	                    if($row=$rs->fetch_object())
+	                        $all_count=$row[0];
+	                    if ($from=="")
+	                        $from=0; 
+                    	if ($from+$paging>$all_count)
+                    	    $cnt2=$all_count;
+	                    else
+	                        $cnt2=$from+$paging;
+	                }
+	                #$rs->close();
 	                */
 	            ?>
 	            

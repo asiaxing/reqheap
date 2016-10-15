@@ -1,8 +1,9 @@
 <?php
     session_start();
     include('ini/params.php');
+    
     // time
-    $_SESSION['time'] = time();
+    #$_SESSION['time'] = time();
     #print "session start:".date('Y/m/d H:i:s', $_SESSION['time'])."<br>";
     
     // default language
@@ -23,8 +24,9 @@
         }
     }
     */
-    #print "inc=".$_GET['inc']."<br>";
+    
     $inc = $_GET['inc'];
+    #print "inc=".$_GET['inc']."<br>";
     
     #print "u_username:".$_POST['u_username']."<br>";
 ?>

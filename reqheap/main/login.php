@@ -1,34 +1,55 @@
 <?php
-    #print "u_username:".$_POST['u_username']."<br>";
+    $debug = false;
+    
+    if($debug) print "u_username:".$_POST['u_username']."<br>";
+    if($debug) print "u_password:".$_POST['u_password']."<br>";
+    
+    $u_username = $_POST['u_username'];
+    $u_password = $_POST['u_password'];
+    
+    include("admin/inc/func.php");
+    include("db/db-link.php");
     if ($u_username != "")
     {
-        /*
         $host = 'localhost';	
 	    $app_database = 'app_database';
 	    $app_user = 'app_user';
 	    $app_user_password = '123_abc_ABC';
 	    $app_dblink = new dblink($host, $app_user, $app_user_password, $app_database);
+	    
         //deleting all old records from tree history
-        $query="delete from tree_history where th_date<DATE_SUB(now(), INTERVAL 1 HOUR);";
-        $rs = $app_dblink->exec_sql($query);
+        #$query="delete from tree_history where th_date<DATE_SUB(now(), INTERVAL 1 HOUR);";
+        #$rs = $app_dblink->exec_sql($query);
  
         $query="select * from users where u_username='".escapeChars($u_username)."' and u_password='".pw($u_password)."'";
+        
         $rs = $app_dblink->query_sql($query);
-        if($row=$rs->fetch_object())
+        
+        if($row = $rs->fetch_object())
         {
-            $_SESSION['uid']=$row['u_id'];
-            $_SESSION['email']=$row['u_email'];
-            $_SESSION['username']=stripslashes($row['u_username']);
-            $_SESSION['name']=stripslashes($row['u_name']);
-            $_SESSION['rights']=$row['u_rights'];
+            $_SESSION['uid'] = $row->u_id;
+            $_SESSION['email'] = $row->u_email;
+            $_SESSION['username'] = stripslashes($row->u_username);
+            $_SESSION['name'] = stripslashes($row->u_name);
+            $_SESSION['rights'] = $row->u_rights;
             
-            if (strstr($_SESSION['http_ref'],"lost_password")) header("Location:index.php");
-            elseif ($_SESSION['http_ref']!="") header("Location:index.php?".$_SESSION['http_ref']);
-            else header("Location:index.php");
+            if($debug) print "uid:".$_SESSION['uid']."<br>";
+            if($debug) print "username:".$_SESSION['username']."<br>";
+            if($debug) print "email:".$_SESSION['email']."<br>";
+            if($debug) print "name:".$_SESSION['name']."<br>";
+            if($debug) print "rights:".$_SESSION['rights']."<br>";
+
+            if (strstr($_SESSION['http_ref'],"lost_password"))
+                header("Location:index.php");
+            elseif ($_SESSION['http_ref']!="")
+                header("Location:index.php?".$_SESSION['http_ref']);
+            else
+                header("Location:index.php");
         } 
         else
             $tmp="<br><br><span class='error'>".$lng[5][6]."</span>";
-        */
+        
+        $rs->close();
     }
 ?>
 

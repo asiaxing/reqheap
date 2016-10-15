@@ -1,5 +1,5 @@
 <?php
-	print "use db/db-link.php<br>";
+	if($debug) print "use db/db-link.php<br>";
 	
 	include('db-api.php');
 
@@ -9,18 +9,20 @@
 		private $user;
 		private $password;
 		private $database;
+		private $debug;
 		
-		public function __construct($host, $user, $password, $database="")
+		public function __construct($host, $user, $password, $database="", $debug=false)
 		{
 			$this->host = $host;
 			$this->user = $user;
 			$this->password = $password;
 			$this->database = $database;
+			$this->debug = $debug;
 			
-			print "[dblink::__construct] host:" . $this->host . "<br>";
-			print "[dblink::__construct] user:" . $this->user . "<br>";
-			print "[dblink::__construct] password:" . $this->password . "<br>";
-			print "[dblink::__construct] database:" . $this->database . "<br>";
+		    if($this->debug) print "[dblink::__construct] host:" . $this->host . "<br>";
+		    if($this->debug) print "[dblink::__construct] user:" . $this->user . "<br>";
+		    if($this->debug) print "[dblink::__construct] password:" . $this->password . "<br>";
+		    if($this->debug) print "[dblink::__construct] database:" . $this->database . "<br>";
 		}
 		
 		public function exec_sql($sql)
@@ -30,26 +32,26 @@
 			$link = dbapi_connect($this->host, $this->user, $this->password, $this->database);
 			if($link)
 			{
-				print "[dblink::exec_sql] database {$this->database} is connected<br>";
-				
-				print "[dblink::exec_sql] execute sql: ". $sql . "<br>";
+			    if($this->debug) print "[dblink::exec_sql] database {$this->database} is connected<br>";
+			    if($this->debug) print "[dblink::exec_sql] execute sql: ". $sql . "<br>";
+			    
 				$ret = dbapi_exec_sql($link, $sql);
 				
 				if($ret)
 				{
-					print "[dblink::exec_sql] execute sql - ok<br>";
+					if($this->debug) print "[dblink::exec_sql] execute sql - ok<br>";
 				}
 				else
 				{
-					print "[dblink::exec_sql] execute sql - fail<br>";
+					if($this->debug) print "[dblink::exec_sql] execute sql - fail<br>";
 				}
 				
 				dbapi_close($link);
-				print "[dblink::exec_sql] database {$this->database} is closed<br>";
+				if($this->debug) print "[dblink::exec_sql] database {$this->database} is closed<br>";
 			}
 			else
 			{
-				print "[dblink::exec_sql] error: database {$this->database} connection fail<br>"; 
+				if($this->debug) print "[dblink::exec_sql] error: database {$this->database} connection fail<br>"; 
 			}
 			
 			return $ret;
@@ -62,19 +64,19 @@
 			$link = dbapi_connect($this->host, $this->user, $this->password, $this->database);
 			if($link)
 			{
-				print "[dblink::query_sql] database {$this->database} is connected<br>";
+				if($this->debug) print "[dblink::query_sql] database {$this->database} is connected<br>";
+				if($this->debug) print "[dblink::query_sql] query sql: ". $sql . "<br>";
 				
-				print "[dblink::query_sql] query sql: ". $sql . "<br>";
 				$records = dbapi_query_sql($link, $sql);
 				
-				print "[dblink::query_sql] get $records->num_rows rows<br>";
+				if($this->debug) print "[dblink::query_sql] get $records->num_rows rows<br>";
 				
 				dbapi_close($link);
-				print "[dblink::query_sql] database {$this->database} is closed<br>";
+				if($this->debug) print "[dblink::query_sql] database {$this->database} is closed<br>";
 			}
 			else
 			{
-				print "[dblink::query_sql] error: database {$this->database} connection fail<br>"; 
+				if($this->debug) print "[dblink::query_sql] error: database {$this->database} connection fail<br>"; 
 			}
 			
 			return $records;

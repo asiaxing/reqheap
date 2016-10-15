@@ -1,9 +1,9 @@
 <?php
-	print "use db/db-init.php<br>";
+	if($debug) print "use db/db-init.php<br>";
 	
 	include('db-link.php');
 	
-	function dbinit_database($host, $super_user, $super_user_password, $app_user, $app_user_password, $app_database)
+	function dbinit_database($host, $super_user, $super_user_password, $app_user, $app_user_password, $app_database, $debug = false)
 	{
 		$ret = false;
 		$super_dblink = new dblink($host, $super_user, $super_user_password);
@@ -12,7 +12,7 @@
 		$ret = $super_dblink->exec_sql($sql);
 		if(!$ret)
 		{
-			print "[dbinit_database] drop database '$app_database' - fail<br>";
+			if($debug) print "[dbinit_database] drop database '$app_database' - fail<br>";
 		}
 		else
 		{
@@ -22,48 +22,48 @@
 		
 			if($ret)
 			{
-				print "[dbinit_database] create database '$app_database' - ok<br>";
+				if($debug) print "[dbinit_database] create database '$app_database' - ok<br>";
 				// create app user
 				$sql = "grant all privileges on $app_database.* to $app_user@$host identified by '$app_user_password'";
 				$ret = $super_dblink->exec_sql($sql);
 			
 				if($ret)
 				{
-					print "[dbinit_database] create $app_user@$host - ok<br>";
+					if($debug) print "[dbinit_database] create $app_user@$host - ok<br>";
 					$ret = dbinit_tables($host, $app_user, $app_user_password, $app_database);
 					if($ret)
 					{
-						print "[dbinit_database] create tables - ok<br>";
+						if($debug) print "[dbinit_database] create tables - ok<br>";
 						$ret = dbinit_data($host, $app_user, $app_user_password, $app_database);
 						if($ret)
 						{
-							print "[dbinit_database] insert data - ok<br>";
+							if($debug) print "[dbinit_database] insert data - ok<br>";
 						}
 						else
 						{
-							print "[dbinit_database] insert data - fail<br>";
+							if($debug) print "[dbinit_database] insert data - fail<br>";
 						}
 					}
 					else
 					{
-						print "[dbinit_database] create tables - fail<br>";
+						if($debug) print "[dbinit_database] create tables - fail<br>";
 					}
 				}
 				else
 				{
-					print "[dbinit_database] create $app_user@$host - fail<br>";
+					if($debug) print "[dbinit_database] create $app_user@$host - fail<br>";
 				}
 			}
 			else
 			{
-				print "[dbinit_database] create database '$app_database' - fail<br>";
+				if($debug) print "[dbinit_database] create database '$app_database' - fail<br>";
 			}
 		}
 		
 		return $ret;
 	}
 	
-	function dbinit_tables($host, $app_user, $app_user_password, $app_database)
+	function dbinit_tables($host, $app_user, $app_user_password, $app_database, $debug = false)
 	{
 		$ret = false;
 		
@@ -449,11 +449,11 @@
 			$ret = $app_dblink->exec_sql($sql);
 			if($ret)
 			{
-				print "[dbinit_tables] create table '$table' - ok<br>";
+				if($debug) print "[dbinit_tables] create table '$table' - ok<br>";
 			}
 			else
 			{
-				print "[dbinit_tables] create table '$table' - fail<br>";
+				if($debug) print "[dbinit_tables] create table '$table' - fail<br>";
 				break;
 			}
 		}
@@ -461,7 +461,7 @@
 		return $ret;
 	}
 	
-	function dbinit_data($host, $app_user, $app_user_password, $app_database)
+	function dbinit_data($host, $app_user, $app_user_password, $app_database, $debug = false)
 	{
 		$ret = false;
 		
@@ -485,11 +485,11 @@
 			$ret = $app_dblink->exec_sql($sql);
 			if($ret)
 			{
-				print "[dbinit_data] insert data '$seq' - ok<br>";
+				if($debug) print "[dbinit_data] insert data '$seq' - ok<br>";
 			}
 			else
 			{
-				print "[dbinit_data] insert data '$seq' - fail<br>";
+				if($debug) print "[dbinit_data] insert data '$seq' - fail<br>";
 				break;
 			}
 		}

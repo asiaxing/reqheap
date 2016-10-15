@@ -1,6 +1,8 @@
 <?php
-    #include('db/db-link.php');
+    $debug = false;
     
+    // search projects
+    /*
     if ($_SESSION['projects']=="")
         $_SESSION['projects']=0;
 
@@ -16,8 +18,7 @@
     else
         $query_project="select p_name, p_id from projects where p_status<>2 order by p_name asc";
     
-    /*
-	#$sql = "select p_name, p_id from projects where p_status=1 order by p_name asc";
+    include('db/db-link.php');
 	$host = 'localhost';	
 	$app_database = 'app_database';
 	$app_user = 'app_user';
@@ -26,12 +27,12 @@
 	$rs = $app_dblink->query_sql($query_project);
 	if($rs->num_rows == 0)
 	{
-	    print "no project exist<br>";
+	    if($debug) print "no project exist<br>";
 	}
 	while($row = $rs->fetch_object())
 	{
-	    print "p_name:".$row['p_name']."<br>";
-	    print "p_id:".$row['p_id']."<br>";
+	    if($debug) print "p_name:".$row['p_name']."<br>";
+	    if($debug) print "p_id:".$row['p_id']."<br>";
 	}
 	*/
 ?>
@@ -45,6 +46,7 @@
                     <?php
                         //setting all assigned projects to the user
                         $project_list="0";
+                        
                         /*
                         #while($row=mysql_fetch_array($rs))
                         while($row = $rs->fetch_object())

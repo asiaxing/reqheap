@@ -1,5 +1,5 @@
 <?php
-	print "use db/db-api.php<br>";
+	if($debug) print "use db/db-api.php<br>";
 	
 	function dbapi_connect($host, $user, $password, $database)
 	{
@@ -17,11 +17,10 @@
 	function dbapi_exec_sql($link, $sql)
 	{
 		$result = $link->query($sql);
-		if (!$result) {
+		if (!$result)
 			return false;
-		} else {
+		else
 			return true;
-		}
 	}
 	
 	function dbapi_query_sql($link, $sql)
