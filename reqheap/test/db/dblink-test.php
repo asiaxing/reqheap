@@ -10,7 +10,7 @@
 		$host = 'localhost';
 		
 		$super_user = 'root';
-		$super_user_password = '1234';
+		$super_user_password = '12345678';
 		
 		$test_database = 'test_database';
 		$test_user = 'test_user';

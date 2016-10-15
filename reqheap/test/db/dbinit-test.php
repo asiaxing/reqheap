@@ -10,7 +10,7 @@
 		$host = 'localhost';
 		
 		$super_user = 'root';
-		$super_user_password = '1234';
+		$super_user_password = '12345678';
 		
 		$app_database = 'app_database';
 		$app_user = 'app_user';
