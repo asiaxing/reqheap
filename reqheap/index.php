@@ -67,6 +67,12 @@
                             case 'login':
                                 include('main/login.php');
                                 break;
+                            case 'manage_projects':
+                                include('main/manage_projects.php');
+                                break;
+                            case 'edit_project':
+                                include('main/edit_project.php');
+                                break;
                             default:
                                 include('main/main.php');
                             }

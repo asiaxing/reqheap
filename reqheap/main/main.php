@@ -137,10 +137,14 @@
 	                }
 	                #$rs->close();
 	                */
+	                
+	                $all_count = 0;
+	                $from=0;
+	                $cnt2=0;
 	            ?>
 	            
 	            <tr class="gray">
-	                <td colspan="4">&nbsp;<b><?php print $lng[4][3]?> (<?php print ($from+1)?> - <?php print $cnt2?> / <?php print $all_count?> )</b></td>
+	                <td colspan="4">&nbsp;<b><?php print $lng[4][3]?> (<?php print $from ?> - <?php print $cnt2?> / <?php print $all_count?> )</b></td>
 	            </tr>
 	            
 	            <?php
@@ -168,6 +172,14 @@
 	                <td>&nbsp;<a href="index.php?inc=view_project&p_id=<?php print $row['p_id']?>"><?php print $new?"<b>":""?><?php print htmlspecialchars($row['p_name'])?><?php print $new?"</b>":""?></a></td>
 	            </tr>	  
 	            -->
+	            
+	            <tr class="blue" style="background-color:<?php print $cl?>;">
+	                <td width="30" align=center>&nbsp;<a href="index.php?inc=view_requirement&r_id=1>"><?php print $new?"<b>":""?>1<?php print $new?"</b>":""?></a></td>
+	                <td>&nbsp;<?php print $new?"<b>":""?>project name<?php print $new?"</b>":""?></td>
+	                <td width="110">&nbsp;<?php print $new?"<b>":""?>2016/01/01 00:00:00<?php print $new?"</b>":""?></td>
+	                <td>&nbsp;<a href="index.php?inc=view_project&p_id=1"><?php print $new?"<b>":""?>project name<?php print $new?"</b>":""?></a></td>
+	            </tr>
+	            
 	            <?php
 	                /*
 	                }
