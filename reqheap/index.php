@@ -67,11 +67,23 @@
                             case 'login':
                                 include('main/login.php');
                                 break;
+                            case 'manage_users':
+                                include('main/manage_users.php');
+                                break;
+                            case 'edit_user':
+                                include('main/edit_user.php');
+                                break;
                             case 'manage_projects':
                                 include('main/manage_projects.php');
                                 break;
                             case 'edit_project':
                                 include('main/edit_project.php');
+                                break;
+                            case 'edit_requirement':
+                                include('main/edit_requirement.php');
+                                break;
+                            case 'my_profile':
+                                include('main/my_profile.php');
                                 break;
                             default:
                                 include('main/main.php');
