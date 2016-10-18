@@ -16,7 +16,7 @@
 		$test_user = 'test_user';
 		$test_user_password = '123_abc_ABC';
 		
-		$super_dblink = new dblink($host, $super_user, $super_user_password);
+		$super_dblink = new dblink($host, $super_user, $super_user_password, true);
 		
 		
 		// drop test database
@@ -43,7 +43,7 @@
 			
 					if($ret)
 					{
-						$test_dblink = new dblink($host, $test_user, $test_user_password, $test_database);
+						$test_dblink = new dblink($host, $test_user, $test_user_password, $test_database, true);
 		
 						// create table
 						$sql = "create table if not exists `user`(
@@ -87,7 +87,7 @@
 		$test_user = 'test_user';
 		$test_user_password = '123_abc_ABC';
 		
-		$test_dblink = new dblink($host, $test_user, $test_user_password, $test_database);
+		$test_dblink = new dblink($host, $test_user, $test_user_password, $test_database, true);
 		
 		$sql = "select * from user";
 		$records = $test_dblink->query_sql($sql);

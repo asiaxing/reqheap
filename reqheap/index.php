@@ -70,6 +70,9 @@
                             case 'login':
                                 include('main/login.php');
                                 break;
+                            case 'logout':
+                                include('main/logout.php');
+                                break;
                             case 'manage_users':
                                 include('main/manage_users.php');
                                 break;
