@@ -64,6 +64,9 @@
                             case 'about':
                                 include('main/about.php');
                                 break;
+                            case 'register':
+                                include('main/register.php');
+                                break;
                             case 'login':
                                 include('main/login.php');
                                 break;
