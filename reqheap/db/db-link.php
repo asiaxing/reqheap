@@ -83,12 +83,4 @@
 		}
 		
 	}
-	
-	$host = 'localhost';
-	
-    $app_database = 'app_database';
-    $app_user = 'app_user';
-    $app_user_password = '123_abc_ABC';
-    
-    $app_dblink = new dblink($host, $app_user, $app_user_password, $app_database);
 ?>
