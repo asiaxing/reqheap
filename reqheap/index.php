@@ -2,6 +2,9 @@
     session_start();
 
     include("ini/lng.php");
+    include("admin/inc/func.php");
+    include("db/db-link.php");
+    include("db/db-login.php");
     
     if(!empty($_GET['inc']))
         $inc = $_GET['inc'];
@@ -43,7 +46,7 @@
                 <tr>
                     <td>
                         <?php
-                            #include ('main/top.php');
+                            include ('main/top.php');
                         ?>
                     </td>
                 </tr>
@@ -63,7 +66,7 @@
                                 include('main/register.php');
                                 break;
                             case 'login':
-                                #include('main/login.php');
+                                include('main/login.php');
                                 break;
                             case 'logout':
                                 include('main/logout.php');
@@ -87,8 +90,7 @@
                                 include('main/my_profile.php');
                                 break;
                             default:
-                                #include('main/main.php');
-                                include('main/login.php');
+                                include('main/main.php');
                             }
                         ?>
                     </td>
@@ -97,7 +99,7 @@
                 <tr>
                     <td>
                         <?php
-                            #include('main/footer.php');
+                            include('main/footer.php');
                         ?>
                     </td>
                 </tr>

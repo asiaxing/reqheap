@@ -1,6 +1,4 @@
 <?php
-    include("admin/inc/func.php");
-    include("db/db-link.php");
     
     function dblogin_get_user_record()
     {
@@ -39,5 +37,39 @@
         
         return false;
     }
-        
+    
+    function dblogin_get_cur_user_id()
+    {
+        if(isset($_SESSION['cur_user_id']))
+            return $_SESSION['cur_user_id'];
+        return null;
+    }
+    
+    function dblogin_get_cur_user_acount()
+    {
+        if(isset($_SESSION['cur_user_acount']))
+            return $_SESSION['cur_user_acount'];
+        return null;
+    }
+    
+    function dblogin_get_cur_user_name()
+    {
+        if(isset($_SESSION['cur_user_name']))
+            return $_SESSION['cur_user_name'];
+        return null;
+    }
+    
+    function dblogin_get_cur_user_email()
+    {
+        if(isset($_SESSION['cur_user_email']))
+            return $_SESSION['cur_user_email'];
+        return null;
+    }
+    
+    function dblogin_get_cur_user_rights()
+    {
+        if(isset($_SESSION['cur_user_rights']))
+            return $_SESSION['cur_user_rights'];
+        return null;
+    }
 ?>

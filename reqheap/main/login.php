@@ -1,8 +1,6 @@
 <?php
     if(!empty($_POST['login_acount']))
     {
-        include("db/db-login.php");
-
         if(dblogin_user_validate())
         {
             header("Location:index.php");

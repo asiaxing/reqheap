@@ -1,9 +1,25 @@
 <?php
 
-    if(!isset($_SESSION['_chlang']))
-        $_SESSION['_chlang']="en";
+    if(!isset($_SESSION['globel_lang']))
+        $_SESSION['globel_lang']="en";
     
     // load language strings
-    include ("lng/".$_SESSION['_chlang'].".php");
+    include ("lng/".$_SESSION['globel_lang'].".php");
     
+    function lng_get_rights($right)
+    {
+        $u_rights = $lng[2][14];
+        switch($right)
+        {
+            case 0:$u_rights=$lng[2][25];break;
+            case 1:$u_rights=$lng[2][14];break;
+            case 2:$u_rights=$lng[2][15];break;
+            case 3:$u_rights=$lng[2][16];break;
+            case 4:$u_rights=$lng[2][17];break;
+            case 5:$u_rights=$lng[2][18];break;
+            default:$u_rights=$lng[2][14];
+        }
+        
+        return $u_rights;
+    }
 ?>

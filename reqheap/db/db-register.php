@@ -1,7 +1,5 @@
 <?php
-    include("admin/inc/func.php");
-    include("db/db-link.php");
-    
+
     function dbregister_save()
     {
         $u_username = $_POST['register_acount'];

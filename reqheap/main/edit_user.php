@@ -1,4 +1,6 @@
-
+<?php
+    $u_id = $_POST['u_id'];
+?>
 
 <form method="post" name="f" action="">
     <table border="0" width="70%">

@@ -1,5 +1,4 @@
 <?php
-
     //escape special characters for saving into DB
     function escapeChars($str)
     {
