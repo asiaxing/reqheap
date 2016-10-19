@@ -1,4 +1,9 @@
 <?php
+    if(!isset($debug))
+    {
+        $debug = false;
+    }
+    
 	if($debug) print "use db/db-init.php<br>";
 	
 	include('db-link.php');
@@ -6,7 +11,7 @@
 	function dbinit_database($host, $super_user, $super_user_password, $app_user, $app_user_password, $app_database, $debug = false)
 	{
 		$ret = false;
-		$super_dblink = new dblink($host, $super_user, $super_user_password);
+		$super_dblink = new dblink($host, $super_user, $super_user_password, null, $debug);
 		
 		$sql = "drop database if exists $app_database";
 		$ret = $super_dblink->exec_sql($sql);
@@ -30,11 +35,11 @@
 				if($ret)
 				{
 					if($debug) print "[dbinit_database] create $app_user@$host - ok<br>";
-					$ret = dbinit_tables($host, $app_user, $app_user_password, $app_database);
+					$ret = dbinit_tables($host, $app_user, $app_user_password, $app_database, $debug);
 					if($ret)
 					{
 						if($debug) print "[dbinit_database] create tables - ok<br>";
-						$ret = dbinit_data($host, $app_user, $app_user_password, $app_database);
+						$ret = dbinit_data($host, $app_user, $app_user_password, $app_database, $debug);
 						if($ret)
 						{
 							if($debug) print "[dbinit_database] insert data - ok<br>";
@@ -442,7 +447,7 @@
 			primary key  (`uf_id`)
 			) engine=myisam  default charset=utf8 auto_increment=1";
 
-		$app_dblink = new dblink($host, $app_user, $app_user_password, $app_database);
+		$app_dblink = new dblink($host, $app_user, $app_user_password, $app_database, $debug);
 		// create table
 		foreach($tables as $table=>$sql)
 		{
@@ -478,7 +483,7 @@
 						(5, '', '', '', '', 0, '', '', '', '', ''),
 						(6, '', '', '', '', 0, '', '', '', '', '')";
 		
-		$app_dblink = new dblink($host, $app_user, $app_user_password, $app_database);
+		$app_dblink = new dblink($host, $app_user, $app_user_password, $app_database, $debug);
 		// insert data
 		foreach($records as $seq=>$sql)
 		{

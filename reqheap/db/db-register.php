@@ -1,11 +1,11 @@
 <?php
     include("admin/inc/func.php");
-    include("db/db-init.php");
+    include("db/db-link.php");
     
     function dbregister_save()
     {
-        $u_username = $_POST['register_login_name'];
-        $u_password = $_POST['register_login_password'];
+        $u_username = $_POST['register_acount'];
+        $u_password = $_POST['register_password'];
         $u_name = $_POST['register_name'];
         $u_email = $_POST['register_email'];
 
@@ -15,10 +15,8 @@
             escapeChars($u_name)."','".
             escapeChars($u_email)."','0')";
         
-        print $sql."<br>";
-        
-        global $app_dblink;
-        
+        $app_dblink = dblink_app();
+                
         // save data to database
         $ret = $app_dblink->exec_sql($sql);
         return $ret;

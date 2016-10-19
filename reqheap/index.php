@@ -1,34 +1,29 @@
 <?php
     session_start();
-    include('ini/params.php');
+
+    include("ini/lng.php");
     
-    // time
-    #$_SESSION['time'] = time();
-    #print "session start:".date('Y/m/d H:i:s', $_SESSION['time'])."<br>";
+    if(!empty($_GET['inc']))
+        $inc = $_GET['inc'];
+    else
+        $inc = null;
+?>
+
+<?php
+    $debug = true;
     
-    // default language
-    $_SESSION['chlang']="en";
-    #print "default language:".$_SESSION['chlang']."<br>";
-    
-    // load language strings
-    #include ('ini/lng/en.php');
-    include ("ini/lng/".$_SESSION['chlang'].".php");
-    
-    /*
-    while (list($key, $val) = each($lng))
+    if($debug)
     {
-        while (list($key2, $val2) = each($lng[$key]))
+        // test
+        if(!empty($_SESSION['cur_user_id']))
         {
-            #$lng[$key][$key2]="[EN]".$val2;
-            #print $lng[$key][$key2]."<br>";
+            print "current user id:". $_SESSION['cur_user_id']."<br>";
+            print "current user acount:". $_SESSION['cur_user_acount']."<br>";
+            print "current user name:".$_SESSION['cur_user_name']."<br>";
+            print "current user email:".$_SESSION['cur_user_email']."<br>";
+            print "current user rights:".$_SESSION['cur_user_rights']."<br>";
         }
     }
-    */
-    
-    $inc = $_GET['inc'];
-    #print "inc=".$_GET['inc']."<br>";
-    
-    #print "u_username:".$_POST['u_username']."<br>";
 ?>
 
 <html>
@@ -48,7 +43,7 @@
                 <tr>
                     <td>
                         <?php
-                            include ('main/top.php');
+                            #include ('main/top.php');
                         ?>
                     </td>
                 </tr>
@@ -68,7 +63,7 @@
                                 include('main/register.php');
                                 break;
                             case 'login':
-                                include('main/login.php');
+                                #include('main/login.php');
                                 break;
                             case 'logout':
                                 include('main/logout.php');
@@ -92,7 +87,8 @@
                                 include('main/my_profile.php');
                                 break;
                             default:
-                                include('main/main.php');
+                                #include('main/main.php');
+                                include('main/login.php');
                             }
                         ?>
                     </td>
@@ -101,7 +97,7 @@
                 <tr>
                     <td>
                         <?php
-                            include('main/footer.php');
+                            #include('main/footer.php');
                         ?>
                     </td>
                 </tr>

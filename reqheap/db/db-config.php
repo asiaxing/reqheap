@@ -1,6 +1,6 @@
 <?php
     
-    class IniFile
+    class dbconfig_file
     {
         private $file_name;
         
@@ -22,19 +22,4 @@
         }
     }
     
-
-    $cfg_file = new IniFile('config.ini');
-    
-    $cfg_file->write("host", "localhost");
-    $cfg_file->write("app_user", "app_user");
-    $cfg_file->write("app_user_password", "123_abc_ABC");
-    $cfg_file->write("app_database", "app_database");
-    
-    print $cfg_file->read('host');
-    print "<br>";
-    print $cfg_file->read('app_user');
-    print "<br>";
-    print $cfg_file->read('app_user_password');
-    print "<br>";
-    print $cfg_file->read('app_database');
 ?>

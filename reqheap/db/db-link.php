@@ -1,4 +1,6 @@
 <?php
+    if(!isset($debug)) $debug = false;
+    
 	if($debug) print "use db/db-link.php<br>";
 	
 	include('db-api.php');
@@ -59,7 +61,7 @@
 		
 		public function query_sql($sql)
 		{
-			$records = false;
+			$records = null;
 			
 			$link = dbapi_connect($this->host, $this->user, $this->password, $this->database);
 			if($link)
@@ -83,4 +85,18 @@
 		}
 		
 	}
+	
+    include("db-config.php");
+    
+    function dblink_app()
+    {
+        $cfg_file = new dbconfig_file("config.ini");
+        $host = $cfg_file->read("host");
+        $app_user = $cfg_file->read("app_user");
+        $app_user_password = $cfg_file->read("app_user_password");
+        $app_database = $cfg_file->read("app_database");
+        $app_dblink = new dblink($host, $app_user, $app_user_password, $app_database, false);
+
+        return $app_dblink;
+    }
 ?>

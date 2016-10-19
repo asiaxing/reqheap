@@ -1,6 +1,5 @@
 <?php
-        
-    if($_POST['register_login_name'] != "")
+    if(!empty($_POST['register_acount']))
     {
         include("db/db-register.php");
         
@@ -25,15 +24,15 @@
 	                </tr>
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][2]?>&nbsp;:&nbsp;</td>
-	                    <td>&nbsp;<input type="text" name="register_login_name"></td>
+	                    <td>&nbsp;<input type="text" name="register_acount"></td>
 	                </tr>  
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][3]?>&nbsp;:&nbsp;</td>
-	                    <td>&nbsp;<input type="password" name="register_login_password"></td>
+	                    <td>&nbsp;<input type="password" name="register_password"></td>
 	                </tr>
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][4]?>&nbsp;:&nbsp;</td>
-	                    <td>&nbsp;<input type="password" name="register_login_password2"></td>
+	                    <td>&nbsp;<input type="password" name="register_password2"></td>
 	                </tr>
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][5]?>&nbsp;:&nbsp;</td>
@@ -58,16 +57,16 @@
     {
         df=document.forms['register'];
 
-        if (df.register_login_name.value == "" || df.register_login_password.value == "" || df.register_name.value == "" || df.register_email.value == "") 
+        if (df.register_acount.value == "" || df.register_password.value == "" || df.register_name.value == "" || df.register_email.value == "") 
         {
             alert("<?php print $lng[6][7]?>");	
             return false;
         } 
 
-        if (df.register_login_password.value != df.register_login_password2.value) 
+        if (df.register_password.value != df.register_password2.value) 
         {
             alert("<?php print $lng[6][9]?>");
-            df.register_login_password2.focus();	
+            df.register_password2.focus();	
             return false;
         }  
 

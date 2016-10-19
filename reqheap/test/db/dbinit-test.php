@@ -1,5 +1,6 @@
 <?php
 	include('../../db/db-init.php');
+	include('../../db/db-config.php');
 ?>
 
 <?php
@@ -16,11 +17,25 @@
 		$app_user = 'app_user';
 		$app_user_password = '123_abc_ABC';
 		
-		$ret = dbinit_database($host, $super_user, $super_user_password, $app_user, $app_user_password, $app_database);
+		$ret = dbinit_database($host, $super_user, $super_user_password, $app_user, $app_user_password, $app_database, true);
 		
 		if($ret)
 		{
-			print "[dbinit_test_case_01] init database - ok<br>";
+		    $cfg_file_name = "../../db/config.ini";
+		    
+		    if(file_exists($cfg_file_name))
+		        unlink($cfg_file_name);
+		    
+		    $cfg_file = new dbconfig_file($cfg_file_name);
+    
+            $cfg_file->write("host", $host);
+            $cfg_file->write("super_user", $super_user);
+            $cfg_file->write("super_user_password", $super_user_password);
+            $cfg_file->write("app_user", $app_user);
+            $cfg_file->write("app_user_password", $app_user_password);
+            $cfg_file->write("app_database", $app_database);
+            
+            print "[dbinit_test_case_01] init database - ok<br>";
 		}
 		else
 		{
