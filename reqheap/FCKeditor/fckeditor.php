@@ -61,7 +61,7 @@ class FCKeditor
 		
 		if ( $this->IsCompatible() )
 		{
-			$Link = "{$this->BasePath}editor/fckeditor".$_SESSION['chlang'].".html?InstanceName={$this->InstanceName}" ;
+			$Link = "{$this->BasePath}editor/fckeditor".$_SESSION['globel_lang'].".html?InstanceName={$this->InstanceName}" ;
 			
 			if ( $this->ToolbarSet != '' )
 				$Link .= "&amp;Toolbar={$this->ToolbarSet}" ;

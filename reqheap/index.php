@@ -3,8 +3,11 @@
 
     include("ini/lng.php");
     include("admin/inc/func.php");
+    include("html/html-table.php");
     include("db/db-link.php");
     include("db/db-login.php");
+    include("db/db-user.php");
+    include("db/db-projects.php");
     
     if(!empty($_GET['inc']))
         $inc = $_GET['inc'];
@@ -90,7 +93,8 @@
                                 include('main/my_profile.php');
                                 break;
                             default:
-                                include('main/main.php');
+                                #include('main/main.php');
+                                include('main/edit_project.php');
                             }
                         ?>
                     </td>

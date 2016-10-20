@@ -12,6 +12,10 @@
             print "<script language=\"JavaScript\">alert(\"Register Fail\");history.back();</script>";
         }
     }
+    else
+    {
+        print time();
+    }
 ?>
 
 <table border="0">
@@ -19,31 +23,45 @@
         <td>
             <form method="post" name="register" action="">
 	            <table border="0" cellpadding="2" cellspacing="2" class="content" width="50%">
+	            
+	                <!-- title -->
 	                <tr class="gray">
 	                    <td colspan="2" align="center"><b><?php print $lng[6][1]?></b></td>
 	                </tr>
+	                
+	                <!-- acount -->
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][2]?>&nbsp;:&nbsp;</td>
 	                    <td>&nbsp;<input type="text" name="register_acount"></td>
-	                </tr>  
+	                </tr>
+	                
+	                <!-- password once -->
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][3]?>&nbsp;:&nbsp;</td>
 	                    <td>&nbsp;<input type="password" name="register_password"></td>
 	                </tr>
+	                
+	                <!-- password twice -->
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][4]?>&nbsp;:&nbsp;</td>
 	                    <td>&nbsp;<input type="password" name="register_password2"></td>
 	                </tr>
+	                
+	                <!-- user name -->
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][5]?>&nbsp;:&nbsp;</td>
 	                    <td>&nbsp;<input type="text" name="register_name"></td>
-	                </tr>  
+	                </tr>
+	                
+	                <!-- user email --> 
 	                <tr class="blue">
 	                    <td align="right">&nbsp;<?php print $lng[6][6]?>&nbsp;:&nbsp;</td>
 	                    <td>&nbsp;<input type="text" name="register_email"></td>
-	                </tr>  
+	                </tr>
+	                
+	                <!-- button -->
 	                <tr class="gray">
-	                    <td colspan="2" align="center"><input type="button" onclick="sub();" value="<?php print $lng[6][1]?>" name="Register"></td>
+	                    <td colspan="2" align="center"><input type="button" onclick="submit();" value="<?php print $lng[6][1]?>" name="register"></td>
 	                </tr>  	    
 	            </table>
                 <input type="hidden" name="inc" value="register">	
@@ -53,7 +71,7 @@
 </table>
 
 <script>
-    function sub()
+    function submit()
     {
         df=document.forms['register'];
 
