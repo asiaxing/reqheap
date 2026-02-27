@@ -1,0 +1,12 @@
+# Sensitive files
+config.ini
+cookies.txt
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
