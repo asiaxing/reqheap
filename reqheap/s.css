@@ -1,0 +1,43 @@
+/* ReqHeap Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+.main {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.topMenu {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.content {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.gray {
+    background-color: #e0e0e0;
+}
+
+.blue {
+    background-color: #d0e0f0;
+}
+
+.light_blue {
+    background-color: #e8f0ff;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

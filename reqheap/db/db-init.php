@@ -1,13 +1,16 @@
 <?php
+    // Prevent multiple includes - use conditional function definitions
+    if (!function_exists('dbinit_database')) {
+
     if(!isset($debug))
     {
         $debug = false;
     }
-    
+
 	if($debug) print "use db/db-init.php<br>";
-	
+
 	include('db-link.php');
-	
+
 	function dbinit_database($host, $super_user, $super_user_password, $app_user, $app_user_password, $app_database, $debug = false)
 	{
 		$ret = false;
@@ -470,8 +473,8 @@
 	{
 		$ret = false;
 		
-		$records[0] = "insert into `admin_access` values(1, 'admin', '61c9fc7e8c467e24a094f825d7be087212992c75')";
-		$records[1] = "insert into `users` values(1, 'admin', '61c9fc7e8c467e24a094f825d7be087212992c75', 'admin@reqheap.com', 'admin', 5)";
+		$records[0] = "insert into `admin_access` values(1, 'admin', '8c065d9305ab5c7eef3ccf8e7656d05d4a1849fe')";
+		$records[1] = "insert into `users` values(1, 'admin', '8c065d9305ab5c7eef3ccf8e7656d05d4a1849fe', 'admin@reqheap.com', 'admin', 5)";
 		$records[2] = "insert into `users` values(2, 'guest', '7d0dcf3f185967102c90353f141884426596e63c', 'guest@reqheap.com', 'guest', 0)";
 		$records[3] = "insert into `user_fields` (`uf_id`, `uf_name_en`, `uf_name_de`,
 						`uf_name_fr`, `uf_name_it`, `uf_type`, `uf_text_en`, `uf_text_fr`,
@@ -501,4 +504,5 @@
 		
 		return $ret;
 	}
+    }
 ?>

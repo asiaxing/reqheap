@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
 
     include("ini/lng.php");
     include("admin/inc/func.php");
@@ -71,6 +72,9 @@
                             case 'login':
                                 include('main/login.php');
                                 break;
+                            case 'lost_password':
+                                include('main/lost_password.php');
+                                break;
                             case 'logout':
                                 include('main/logout.php');
                                 break;
@@ -92,6 +96,39 @@
                             case 'my_profile':
                                 include('main/my_profile.php');
                                 break;
+                            case 'view_all':
+                                include('main/view_all.php');
+                                break;
+                            case 'manage_reviews':
+                                include('main/manage_reviews.php');
+                                break;
+                            case 'statistics':
+                                include('main/statistics.php');
+                                break;
+                            case 'manage_subprojects':
+                                include('main/manage_subprojects.php');
+                                break;
+                            case 'manage_releases':
+                                include('main/manage_releases.php');
+                                break;
+                            case 'manage_cases':
+                                include('main/manage_cases.php');
+                                break;
+                            case 'manage_stakeholders':
+                                include('main/manage_stakeholders.php');
+                                break;
+                            case 'manage_glossary':
+                                include('main/manage_glossary.php');
+                                break;
+                            case 'manage_components':
+                                include('main/manage_components.php');
+                                break;
+                            case 'import':
+                                include('main/import.php');
+                                break;
+                            case 'manage_keywords':
+                                include('main/manage_keywords.php');
+                                break;
                             default:
                                 #include('main/main.php');
                                 include('main/edit_project.php');
@@ -111,5 +148,6 @@
         </center>
     </body>
 </html>
+<?php ob_end_flush(); ?>
 
 

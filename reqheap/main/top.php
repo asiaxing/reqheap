@@ -1,3 +1,7 @@
+<?php
+    // Get current language
+    $current_lang = isset($_SESSION['globel_lang']) ? $_SESSION['globel_lang'] : 'en';
+?>
 <table border="0" cellpadding="2" cellspacing="0" class="topMenu" width="100%">
     <tr>
         <td>
@@ -37,7 +41,7 @@
                 <?=$lng[2][40]?></a>&nbsp;|
             &nbsp;<a href="index.php?inc=statistics">
                 <?php print $lng[2][29]?></a>
-            
+
             <td align="right">&nbsp;
                 <?php if (dblogin_get_cur_user_id() != null)
                     {
@@ -46,7 +50,7 @@
                         print htmlspecialchars(dblogin_get_cur_user_acount());
                 ?>
                 <span class="small">(
-                <?php print htmlspecialchars(dblogin_get_cur_user_name())?> - 
+                <?php print htmlspecialchars(dblogin_get_cur_user_name())?> -
                 <?php
                     switch(dblogin_get_cur_user_rights())
                     {
@@ -60,13 +64,21 @@
                     }
                 ?>
                 )</span><a href="index.php?inc=logout"><?php print $lng[2][12]?></a>
-                <?php 
+                <?php
                     }else{
                 ?>
                     <a href="index.php?inc=login"><?php print $lng[2][11]?></a> | <a href="index.php?inc=register"><?php print $lng[2][13]?></a>
                 <?php
                     }
                 ?>
+                &nbsp;|&nbsp;
+                <select onchange="location.href='main/setlang.php?lang='+this.value" style="font-size:11px;">
+                    <option value="en" <?php echo $current_lang=='en'?'selected':''?>>English</option>
+                    <option value="de" <?php echo $current_lang=='de'?'selected':''?>>Deutsch</option>
+                    <option value="fr" <?php echo $current_lang=='fr'?'selected':''?>>Francais</option>
+                    <option value="it" <?php echo $current_lang=='it'?'selected':''?>>Italiano</option>
+                    <option value="zh" <?php echo $current_lang=='zh'?'selected':''?>>中文</option>
+                </select>
         </td>
     </tr>
 </table>

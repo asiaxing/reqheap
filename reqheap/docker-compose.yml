@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html/
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=reqheap
+      - DB_PASSWORD=reqheap_password
+      - DB_NAME=reqheap
+    networks:
+      - reqheap-network
+
+  db:
+    image: docker.m.daocloud.io/library/mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=reqheap
+      - MYSQL_USER=reqheap
+      - MYSQL_PASSWORD=reqheap_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - reqheap-network
+
+volumes:
+  mysql-data:
+
+networks:
+  reqheap-network:
+    driver: bridge
